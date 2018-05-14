@@ -10,30 +10,30 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    ../src/chain/action.cpp \
-    ../src/chain/chainmanager.cpp \
-    ../src/chain/eosbytewriter.cpp \
-    ../src/chain/eosnewaccount.cpp \
-    ../src/chain/packedtransaction.cpp \
-    ../src/chain/signedtransaction.cpp \
-    ../src/chain/transaction.cpp \
-    ../src/chain/transactionheader.cpp \
-    ../src/chain/typeaccountpermissionweight.cpp \
-    ../src/chain/typeauthority.cpp \
-    ../src/chain/typekeypermissionweight.cpp \
-    ../src/chain/typename.cpp \
-    ../src/chain/typepermissionlevel.cpp \
-    ../src/Crypto/aes.c \
-    ../src/Crypto/base58.c \
-    ../src/Crypto/rmd160.c \
-    ../src/Crypto/sha2.c \
-    ../src/Crypto/sha3.c \
-    ../src/Crypto/uECC.c \
-    ../src/ec/eos_key_encode.cpp \
-    ../src/ec/sha512.cpp \
-    ../src/ec/typechainid.cpp \
-    ../src/utility/utils.cpp \
-    ../src/utility/httpclient.cpp
+    ../chain/action.cpp \
+    ../chain/chainmanager.cpp \
+    ../chain/eosbytewriter.cpp \
+    ../chain/eosnewaccount.cpp \
+    ../chain/packedtransaction.cpp \
+    ../chain/signedtransaction.cpp \
+    ../chain/transaction.cpp \
+    ../chain/transactionheader.cpp \
+    ../chain/typeaccountpermissionweight.cpp \
+    ../chain/typeauthority.cpp \
+    ../chain/typekeypermissionweight.cpp \
+    ../chain/typename.cpp \
+    ../chain/typepermissionlevel.cpp \
+    ../Crypto/aes.c \
+    ../Crypto/base58.c \
+    ../Crypto/rmd160.c \
+    ../Crypto/sha2.c \
+    ../Crypto/sha3.c \
+    ../Crypto/uECC.c \
+    ../ec/eos_key_encode.cpp \
+    ../ec/sha512.cpp \
+    ../ec/typechainid.cpp \
+    ../utility/httpclient.cpp \
+    ../utility/utils.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -47,31 +47,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    ../src/chain/action.h \
-    ../src/chain/chainbase.h \
-    ../src/chain/chainmanager.h \
-    ../src/chain/eosbytewriter.h \
-    ../src/chain/eosnewaccount.h \
-    ../src/chain/packedtransaction.h \
-    ../src/chain/signedtransaction.h \
-    ../src/chain/transaction.h \
-    ../src/chain/transactionheader.h \
-    ../src/chain/typeaccountpermissionweight.h \
-    ../src/chain/typeauthority.h \
-    ../src/chain/typekeypermissionweight.h \
-    ../src/chain/typename.h \
-    ../src/chain/typepermissionlevel.h \
-    ../src/Crypto/aes.h \
-    ../src/Crypto/aes.hpp \
-    ../src/Crypto/libbase58.h \
-    ../src/Crypto/macros.h \
-    ../src/Crypto/options.h \
-    ../src/Crypto/rmd160.h \
-    ../src/Crypto/sha2.h \
-    ../src/Crypto/sha3.h \
-    ../src/Crypto/uECC.h \
-    ../src/ec/eos_key_encode.h \
-    ../src/ec/sha512.h \
-    ../src/ec/typechainid.h \
-    ../src/utility/utils.h \
-    ../src/utility/httpclient.h
+    ../chain/action.h \
+    ../chain/chainbase.h \
+    ../chain/chainmanager.h \
+    ../chain/eosbytewriter.h \
+    ../chain/eosnewaccount.h \
+    ../chain/packedtransaction.h \
+    ../chain/signedtransaction.h \
+    ../chain/transaction.h \
+    ../chain/transactionheader.h \
+    ../chain/typeaccountpermissionweight.h \
+    ../chain/typeauthority.h \
+    ../chain/typekeypermissionweight.h \
+    ../chain/typename.h \
+    ../chain/typepermissionlevel.h \
+    ../Crypto/aes.h \
+    ../Crypto/aes.hpp \
+    ../Crypto/libbase58.h \
+    ../Crypto/macros.h \
+    ../Crypto/options.h \
+    ../Crypto/rmd160.h \
+    ../Crypto/sha2.h \
+    ../Crypto/sha3.h \
+    ../Crypto/uECC.h \
+    ../ec/eos_key_encode.h \
+    ../ec/sha512.h \
+    ../ec/typechainid.h \
+    ../utility/httpclient.h \
+    ../utility/utils.h
