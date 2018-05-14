@@ -1,0 +1,3 @@
+# Qt's related
+test/build-*
+test/*.pro.user
