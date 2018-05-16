@@ -2,6 +2,7 @@
 #define TRANSACTIONEXTENSION_H
 
 #include "chainbase.h"
+#include <vector>
 
 class TransactionExtension : public ISerializer
 {
