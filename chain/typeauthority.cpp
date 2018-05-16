@@ -30,11 +30,30 @@ TypeAuthority::TypeAuthority(int threshold, const std::string &pubKey, const std
     this->threshold = threshold;
     if (!pubKey.empty()) {
         this->keys.push_back(TypeKeyPermissionWeight(pubKey, 1));
-
     }
     if (!permission.empty()) {
         this->accounts.push_back(TypeAccountPermissionWeight(permission));
     }
+}
+
+TypeAuthority::TypeAuthority(const std::string &key, uint32_t delay_sec)
+{
+    this->threshold = 1;
+    if (!key.empty()) {
+        this->keys.push_back(TypeKeyPermissionWeight(key, 1));
+    }
+    if (delay_sec > 0) {
+        this->threshold = 2;
+        waits.push_back(TypeWaitWeight(delay_sec, 1));
+    }
+}
+
+TypeAuthority::TypeAuthority(uint32_t t, std::vector<TypeKeyPermissionWeight> k, std::vector<TypeAccountPermissionWeight> p, std::vector<TypeWaitWeight> w)
+{
+    this->threshold = t;
+    this->keys = std::move(k);
+    this->accounts = std::move(p);
+    this->waits = std::move(w);
 }
 
 void TypeAuthority::serialize(EOSByteWriter *writer) const
@@ -43,7 +62,6 @@ void TypeAuthority::serialize(EOSByteWriter *writer) const
         writer->putIntLE(threshold);
         SerializeCollection<TypeKeyPermissionWeight>(keys, writer);
         SerializeCollection<TypeAccountPermissionWeight>(accounts, writer);
-        //writer->putCollection(keys);
-        //writer->putCollection(accounts);
+        SerializeCollection<TypeWaitWeight>(waits, writer);
     }
 }

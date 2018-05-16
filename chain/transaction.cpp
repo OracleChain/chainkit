@@ -13,8 +13,7 @@ void Transaction::serialize(EOSByteWriter *writer) const
 
         SerializeCollection(context_free_action, writer);
         SerializeCollection(actions, writer);
-        //writer->putCollection(context_free_action);
-        //writer->putCollection(actions);
+        SerializeCollection(transaction_extensions, writer);
     }
 }
 

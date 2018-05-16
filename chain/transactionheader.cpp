@@ -7,7 +7,6 @@
 
 TransactionHeader::TransactionHeader()
 {
-    region = 0;
     ref_block_num = 0;
     ref_block_prefix = 0;
     net_usage_words = 0;
@@ -20,7 +19,6 @@ void TransactionHeader::serialize(EOSByteWriter *writer) const
    if (writer) {
        QDateTime date = QDateTime::fromString(QString::fromStdString(expiration), Qt::ISODate);
        writer->putIntLE((int)(date.toMSecsSinceEpoch() / 1000 + date.offsetFromUtc() + EXPIRATION_SEC));
-       writer->putShortLE((short)(region & 0xFFFF));
        writer->putShortLE((short)ref_block_num & 0xFFFF);
        writer->putIntLE((int)(ref_block_prefix & 0xFFFFFFFF));
        writer->putVariableUInt(net_usage_words);
@@ -32,12 +30,14 @@ void TransactionHeader::serialize(EOSByteWriter *writer) const
 QJsonValue TransactionHeader::toJson() const
 {
     QJsonObject obj;
-    obj.insert("expiration", QJsonValue(expiration.c_str()));
-    obj.insert("region", QJsonValue((int)region));
+    QDateTime date = QDateTime::fromString(QString::fromStdString(expiration), Qt::ISODate);
+    date = date.addSecs(EXPIRATION_SEC+ date.offsetFromUtc());
+
+    obj.insert("expiration", QJsonValue(date.toString(Qt::ISODate)));
     obj.insert("ref_block_num", QJsonValue((int)ref_block_num));
     obj.insert("ref_block_prefix", QJsonValue::fromVariant(QVariant((uint)ref_block_prefix)));
-    obj.insert("net_usage_words", QJsonValue((int)net_usage_words));
-    obj.insert("kcpu_usage", QJsonValue((int)kcpu_usage));
+    obj.insert("max_net_usage_words", QJsonValue((int)net_usage_words));
+    obj.insert("max_kcpu_usage", QJsonValue((int)kcpu_usage));
     obj.insert("delay_sec", QJsonValue((int)delay_seconds));
 
     return QJsonValue(obj);
@@ -51,7 +51,6 @@ void TransactionHeader::fromJson(const QJsonValue &value)
     }
 
     expiration = obj.value("expiration").toString().toStdString();
-    region = obj.value("region").toInt();
     ref_block_num = obj.value("ref_block_num").toInt();
     ref_block_prefix = obj.value("ref_block_prefix").toVariant().toUInt();
     net_usage_words = obj.value("net_usage_words").toInt();

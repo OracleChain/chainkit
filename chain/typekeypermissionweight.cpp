@@ -21,7 +21,6 @@ void TypeKeyPermissionWeight::serialize(EOSByteWriter *writer) const
         if (!pub.empty()) {
             writer->putBytes(pub.data(), pub.size());
         }
-        //writer->putBytes((const unsigned char*)pubKey.c_str(), pubKey.size());
 
         writer->putShortLE(weight);
     }

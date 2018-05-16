@@ -2,6 +2,7 @@
 #include "eosbytewriter.h"
 #include "../Crypto/libbase58.h"
 #include "../utility/utils.h"
+#include "../ec/sha256.h"
 
 extern "C"
 {
@@ -79,7 +80,7 @@ void SignedTransaction::sign(const std::vector<unsigned char> &pri_key, const Ty
     uint8_t packedSha256[SHA256_DIGEST_LENGTH];
     sha256_Raw(packedBytes.data(), packedBytes.size(), packedSha256);
 
-    uint8_t signature[uECC_BYTES * 2];
+    uint8_t signature[uECC_BYTES * 2] = { 0 };
     int recId = uECC_sign_forbc(pri_key.data(), packedSha256, signature);
     if (recId == -1) {
         // could not find recid, data probably already signed by the key before?
@@ -92,13 +93,17 @@ void SignedTransaction::sign(const std::vector<unsigned char> &pri_key, const Ty
         bin[0] = (unsigned char)headerBytes;
         memcpy(bin + 1, signature, uECC_BYTES * 2);
 
-        rmdhash = RMD(bin,65);
+        unsigned char temp[67] = { 0 };
+        memcpy(temp, bin, 65);
+        memcpy(temp + 65, "K1", 2);
+
+        rmdhash = RMD(temp, 67);
         memcpy(bin + 1 +  uECC_BYTES * 2, rmdhash, 4);
 
         char sigbin[100] = { 0 };
         size_t sigbinlen = 100;
         b58enc(sigbin, &sigbinlen, bin, binlen);
-        std::string sig = "EOS";
+        std::string sig = "SIG_K1_";
         sig += sigbin;
 
         signatures.push_back(sig);
@@ -123,6 +128,22 @@ std::vector<unsigned char> SignedTransaction::getDigestForSignature(const TypeCh
     writer.putBytes(cid.chainId(), cid.size());
 
     serialize(&writer);
+
+    std::vector<unsigned char> free_data;
+    for (auto str = context_free_data.cbegin(); str != context_free_data.cend(); ++str) {
+        for (auto it = (*str).cbegin(); it != (*str).cend(); ++it) {
+            free_data.push_back(*it);
+        }
+    }
+
+    if (free_data.size()) {
+        std::string str(free_data.begin(), free_data.end());
+        sha256 h = sha256::hash(str);
+        writer.putBytes((const unsigned char *)h.data(), h.data_size());
+    } else {
+        sha256 h;
+        writer.putBytes((const unsigned char *)h.data(), h.data_size());
+    }
 
     return writer.toBytes();
 }

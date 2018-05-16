@@ -2,9 +2,9 @@
 #define TRANSACTION_H
 
 #include "transactionheader.h"
+#include "transactionextension.h"
 #include "action.h"
 #include <vector>
-
 
 class Transaction : public TransactionHeader
 {
@@ -21,6 +21,7 @@ public:
 private:
     std::vector<Action> context_free_action;  // action
     std::vector<Action> actions;
+    std::vector<TransactionExtension> transaction_extensions;
 };
 
 #endif // TRANSACTION_H

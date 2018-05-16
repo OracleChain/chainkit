@@ -32,7 +32,7 @@ void EOSNewAccount::serialize(EOSByteWriter *writer) const
         newName.serialize(writer);
         owner.serialize(writer);
         active.serialize(writer);
-        recovery.serialize(writer);
+        //recovery.serialize(writer);
     }
 }
 

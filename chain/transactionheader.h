@@ -20,7 +20,6 @@ public:
 
 private:
     std::string expiration;
-    int region;
     int ref_block_num;
     LONG ref_block_prefix;
     LONG net_usage_words;
@@ -28,7 +27,7 @@ private:
     LONG delay_seconds;
 
 private:
-    const static int EXPIRATION_SEC = 300;
+    const static int EXPIRATION_SEC = 30;
 };
 
 #endif // TRANSACTIONHEADER_H

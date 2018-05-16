@@ -33,7 +33,10 @@ SOURCES += main.cpp \
     ../ec/sha512.cpp \
     ../ec/typechainid.cpp \
     ../utility/httpclient.cpp \
-    ../utility/utils.cpp
+    ../utility/utils.cpp \
+    ../chain/transactionextension.cpp \
+    ../chain/typewaitweight.cpp \
+    ../ec/sha256.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -74,4 +77,7 @@ HEADERS += \
     ../ec/sha512.h \
     ../ec/typechainid.h \
     ../utility/httpclient.h \
-    ../utility/utils.h
+    ../utility/utils.h \
+    ../chain/transactionextension.h \
+    ../chain/typewaitweight.h \
+    ../ec/sha256.h
