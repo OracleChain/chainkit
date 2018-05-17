@@ -35,52 +35,52 @@ void HttpClient::get_info()
     MakeRequest(make_url(get_info_func));
 }
 
-void HttpClient::push_transaction(const QString &content)
+void HttpClient::push_transaction(const QByteArray &content)
 {
     MakeRequest(make_url(push_txn_func), content_type_application_json, content);
 }
 
-void HttpClient::push_transactions(const QString &content)
+void HttpClient::push_transactions(const QByteArray &content)
 {
     MakeRequest(make_url(push_txns_func), content_type_application_json, content);
 }
 
-void HttpClient::get_account(const QString &content)
+void HttpClient::get_account(const QByteArray &content)
 {
     MakeRequest(make_url(get_account_func), content_type_application_json, content);
 }
 
-void HttpClient::get_transactions(const QString &content)
+void HttpClient::get_transactions(const QByteArray &content)
 {
     MakeRequest(make_url(get_transactions_func), content_type_application_json, content);
 }
 
-void HttpClient::get_controlled_accounts(const QString &content)
+void HttpClient::get_controlled_accounts(const QByteArray &content)
 {
     MakeRequest(make_url(get_controlled_accounts_func), content_type_application_json, content);
 }
 
-void HttpClient::abi_json_to_bin(const QString &content)
+void HttpClient::abi_json_to_bin(const QByteArray &content)
 {
     MakeRequest(make_url(json_to_bin_func), content_type_application_json, content);
 }
 
-void HttpClient::get_required_keys(const QString &content)
+void HttpClient::get_required_keys(const QByteArray &content)
 {
     MakeRequest(make_url(get_required_keys_func), content_type_application_json, content);
 }
 
-void HttpClient::get_table(const QString &content)
+void HttpClient::get_table(const QByteArray &content)
 {
     MakeRequest(make_url(get_table_func), content_type_application_json, content);
 }
 
-void HttpClient::get_block(const QString &content)
+void HttpClient::get_block(const QByteArray &content)
 {
     MakeRequest(make_url(get_block_func), content_type_application_json, content);
 }
 
-void HttpClient::MakeRequest(const QString &url, const QString &contentType, const QString &param)
+void HttpClient::MakeRequest(const QString &url, const QString &contentType, const QByteArray &param)
 {
     QNetworkRequest request;
     request.setAttribute(QNetworkRequest::HttpStatusCodeAttribute, 200);
@@ -91,7 +91,7 @@ void HttpClient::MakeRequest(const QString &url, const QString &contentType, con
     }
 
     if (qnam) {
-        reply = qnam->post(request, param.toUtf8());
+        reply = qnam->post(request, param);
         Q_ASSERT(reply);
 
         connect(reply, &QNetworkReply::finished, this, &HttpClient::slotReadAll);

@@ -57,18 +57,18 @@ public:
     ~HttpClient();
 
     void get_info();
-    void push_transaction(const QString& content);
-    void push_transactions(const QString& content);
-    void get_account(const QString& content);
-    void get_transactions(const QString& content);
-    void get_controlled_accounts(const QString& content);
-    void abi_json_to_bin(const QString& content);
-    void get_required_keys(const QString& content);
-    void get_table(const QString& content);
-    void get_block(const QString& content);
+    void push_transaction(const QByteArray& content);
+    void push_transactions(const QByteArray& content);
+    void get_account(const QByteArray& content);
+    void get_transactions(const QByteArray& content);
+    void get_controlled_accounts(const QByteArray& content);
+    void abi_json_to_bin(const QByteArray& content);
+    void get_required_keys(const QByteArray& content);
+    void get_table(const QByteArray& content);
+    void get_block(const QByteArray& content);
 
 private:
-    void MakeRequest(const QString& url, const QString& contentType = "", const QString& param = "");
+    void MakeRequest(const QString& url, const QString& contentType = "", const QByteArray& param = "");
 
 signals:
     void responseData(const QByteArray& );
