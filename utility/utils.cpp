@@ -38,29 +38,5 @@ std::vector<unsigned char> convertHexStrToBytes(const std::vector<unsigned char>
     return dst;
 }
 
-std::vector<int> divNumber(int number, int daemon)
-{
-    std::stack<int> quots;
-    div_t d = div(number, daemon);
-    if (d.quot < daemon) {
-        quots.push(d.quot);
-    } else {
-        d.quot = number;
-        d.rem = 0;
-        do
-        {
-            d = div(d.quot, daemon);
-            quots.push(d.rem);
-        } while (d.quot >= daemon);
-    }
-
-    std::vector<int> result;
-    while(!quots.empty()) {
-        result.push_back(quots.top());
-        quots.pop();
-    }
-
-    return result;
-}
 }
 

@@ -7,7 +7,6 @@
 namespace Utils {
 
     uint32_t convertEndian(uint32_t value);
-    std::vector<int> divNumber(int number, int daemon);
 
     std::vector<unsigned char> convertBytesToHexStr(const std::vector<unsigned char>& src);
     std::vector<unsigned char> convertHexStrToBytes(const std::vector<unsigned char>& hex);
