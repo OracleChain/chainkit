@@ -50,9 +50,9 @@ void HttpClient::get_account(const QByteArray &content)
     MakeRequest(make_url(get_account_func), content_type_application_json, content);
 }
 
-void HttpClient::get_transactions(const QByteArray &content)
+void HttpClient::get_transaction(const QByteArray &content)
 {
-    MakeRequest(make_url(get_transactions_func), content_type_application_json, content);
+    MakeRequest(make_url(get_transaction_func), content_type_application_json, content);
 }
 
 void HttpClient::get_controlled_accounts(const QByteArray &content)

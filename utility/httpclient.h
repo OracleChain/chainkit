@@ -19,11 +19,11 @@ const QString get_currency_balance_func = chain_func_base + "/get_currency_balan
 const QString get_currency_stats_func = chain_func_base + "/get_currency_stats";
 const QString get_required_keys_func = chain_func_base + "/get_required_keys";
 
-const QString account_history_func_base = "/v1/account_history";
-const QString get_transaction_func = account_history_func_base + "/get_transaction";
-const QString get_transactions_func = account_history_func_base + "/get_transactions";
-const QString get_key_accounts_func = account_history_func_base + "/get_key_accounts";
-const QString get_controlled_accounts_func = account_history_func_base + "/get_controlled_accounts";
+const QString history_func_base = "/v1/history";
+const QString get_actions_func = history_func_base + "/get_actions";
+const QString get_transaction_func = history_func_base + "/get_transaction";
+const QString get_key_accounts_func = history_func_base + "/get_key_accounts";
+const QString get_controlled_accounts_func = history_func_base + "/get_controlled_accounts";
 
 const QString net_func_base = "/v1/net";
 const QString net_connect = net_func_base + "/connect";
@@ -60,7 +60,7 @@ public:
     void push_transaction(const QByteArray& content);
     void push_transactions(const QByteArray& content);
     void get_account(const QByteArray& content);
-    void get_transactions(const QByteArray& content);
+    void get_transaction(const QByteArray& content);
     void get_controlled_accounts(const QByteArray& content);
     void abi_json_to_bin(const QByteArray& content);
     void get_required_keys(const QByteArray& content);
