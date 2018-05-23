@@ -25,24 +25,6 @@ const QString get_transaction_func = history_func_base + "/get_transaction";
 const QString get_key_accounts_func = history_func_base + "/get_key_accounts";
 const QString get_controlled_accounts_func = history_func_base + "/get_controlled_accounts";
 
-const QString net_func_base = "/v1/net";
-const QString net_connect = net_func_base + "/connect";
-const QString net_disconnect = net_func_base + "/disconnect";
-const QString net_status = net_func_base + "/status";
-const QString net_connections = net_func_base + "/connections";
-
-const QString wallet_func_base = "/v1/wallet";
-const QString wallet_create = wallet_func_base + "/create";
-const QString wallet_open = wallet_func_base + "/open";
-const QString wallet_list = wallet_func_base + "/list_wallets";
-const QString wallet_list_keys = wallet_func_base + "/list_keys";
-const QString wallet_public_keys = wallet_func_base + "/get_public_keys";
-const QString wallet_lock = wallet_func_base + "/lock";
-const QString wallet_lock_all = wallet_func_base + "/lock_all";
-const QString wallet_unlock = wallet_func_base + "/unlock";
-const QString wallet_import_key = wallet_func_base + "/import_key";
-const QString wallet_sign_trx = wallet_func_base + "/sign_transaction";
-
 const QString content_type_application_json = "application/json";
 
 const QString eos_account_regex = "([.1-5a-z]{3,13}$)";
