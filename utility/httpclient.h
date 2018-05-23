@@ -27,7 +27,7 @@ const QString get_controlled_accounts_func = history_func_base + "/get_controlle
 
 const QString content_type_application_json = "application/json";
 
-const QString eos_account_regex = "([.1-5a-z]{3,13}$)";
+const QString eos_account_regex = "([.1-5a-z]{3,12}$)";
 
 QString make_url(const QString& api_url);
 
