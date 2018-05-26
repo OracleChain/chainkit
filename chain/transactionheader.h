@@ -22,8 +22,8 @@ private:
     std::string expiration;
     int ref_block_num;
     LONG ref_block_prefix;
-    LONG net_usage_words;
-    LONG kcpu_usage;
+    LONG max_net_usage_words;
+    LONG max_cpu_usage_ms;
     LONG delay_seconds;
 
 private:
