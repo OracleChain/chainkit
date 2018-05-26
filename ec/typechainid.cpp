@@ -25,11 +25,15 @@ const unsigned char *TypeChainId::chainId() const
 
 TypeChainId TypeChainId::fromHex(const std::string& strHex)
 {
+    TypeChainId cid;
+    if (strHex.empty()) {
+        return cid;
+    }
+
     //assert(strHex.size() == 64);
     std::vector<unsigned char> vec(strHex.begin(), strHex.end());
     std::vector<unsigned char> bytes = Utils::convertHexStrToBytes(vec);
 
-    TypeChainId cid;
     cid.setBytes(bytes.data());
     return cid;
 }
