@@ -12,7 +12,7 @@ namespace ChainManager {
 
     std::vector<std::string> getActivePermission(const std::string& accountName);
 
-    void ValidateSignature(const std::string& raw, const std::string& signature, const std::string& pubKey, std::string& result);
+    void ValidateSignature(const std::string& raw, const std::string& signature, const std::string& pubKey, const std::string& chain_id, std::string& result);
 }
 
 #endif // CHAINMANAGER_H

@@ -35,7 +35,7 @@ std::vector<std::string> getActivePermission(const std::string &accountName)
     return permissions;
 }
 
-void ValidateSignature(const std::string &raw, const std::string &signature, const std::string &pubKey, std::string &result)
+void ValidateSignature(const std::string &raw, const std::string &signature, const std::string &pubKey, const std::string &chain_id, std::string &result)
 {
     result = "unknown error";
 
@@ -50,7 +50,7 @@ void ValidateSignature(const std::string &raw, const std::string &signature, con
     SignedTransaction sigedTxn;
     sigedTxn.fromJson(value);
 
-    if (sigedTxn.signTest(signatureHex, pub, TypeChainId())) {
+    if (sigedTxn.signTest(signatureHex, pub, TypeChainId::fromHex(chain_id))) {
         result = "Passed, signature and raw action match the public key!";
     } else {
         result = "Failed, signature and raw action do not match the public key!";
