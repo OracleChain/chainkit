@@ -87,6 +87,7 @@ std::string eos_key::get_eos_public_key_by_wif(const std::string& wif)
     const char *baprik = wif.c_str();
     unsigned char result[37];
     unsigned char digest[32];
+    unsigned char last4Bytes[4];
     char base[100];
     unsigned char *hash;
     size_t len = 100;
@@ -99,15 +100,25 @@ std::string eos_key::get_eos_public_key_by_wif(const std::string& wif)
         printf("success\n");
     }
 
+    if (result[0] != 0x80) {
+        printf("failed\n");
+        return eos_pub;
+    }
+
     memcpy(pri, result+1, 32);
+    memcpy(last4Bytes, result+33, 4);
 
     uECC_compute_public_key(pri, pub);
 
-    result[0] = 0x80;
-    memcpy(result+1, pri, 32);
     sha256_Raw(result, 33, digest);
     sha256_Raw(digest, 32, digest);
     memcpy(result+33, digest, 4);
+
+    if (!strcmp((const char *)result+33, (const char *)last4Bytes)) {
+        printf("failed\n");
+        return eos_pub;
+    }
+
     b58enc(base, &len, result, 37);
 
     uECC_compress(pub, cpub);
