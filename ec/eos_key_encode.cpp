@@ -114,7 +114,7 @@ std::string eos_key::get_eos_public_key_by_wif(const std::string& wif)
     sha256_Raw(digest, 32, digest);
     memcpy(result+33, digest, 4);
 
-    if (!strcmp((const char *)result+33, (const char *)last4Bytes)) {
+    if (strncmp(reinterpret_cast<const char *>(result+33), reinterpret_cast<const char *>(last4Bytes), 4)) {
         printf("failed\n");
         return eos_pub;
     }
