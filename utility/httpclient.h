@@ -54,7 +54,7 @@ public:
     explicit HttpClient(QObject *parent = 0);
     ~HttpClient();
 
-    void request(FunctionID id, const QByteArray& content);
+    void request(FunctionID id, const QByteArray& content = "");
 
 private:
     void MakeRequest(const QString& url, const QString& contentType = "", const QByteArray& param = "");
