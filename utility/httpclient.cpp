@@ -7,6 +7,8 @@
 extern QString base_url;
 extern QString url_port;
 
+#define ARRAY_SIZE(a) (sizeof(a)/sizeof(a[0]))
+
 QString make_url(const QString& api_url)
 {
     QString url = base_url;
@@ -30,54 +32,14 @@ HttpClient::~HttpClient()
     }
 }
 
-void HttpClient::get_info()
+void HttpClient::request(FunctionID id, const QByteArray &content)
 {
-    MakeRequest(make_url(get_info_func));
-}
-
-void HttpClient::push_transaction(const QByteArray &content)
-{
-    MakeRequest(make_url(push_txn_func), content_type_application_json, content);
-}
-
-void HttpClient::push_transactions(const QByteArray &content)
-{
-    MakeRequest(make_url(push_txns_func), content_type_application_json, content);
-}
-
-void HttpClient::get_account(const QByteArray &content)
-{
-    MakeRequest(make_url(get_account_func), content_type_application_json, content);
-}
-
-void HttpClient::get_transaction(const QByteArray &content)
-{
-    MakeRequest(make_url(get_transaction_func), content_type_application_json, content);
-}
-
-void HttpClient::get_controlled_accounts(const QByteArray &content)
-{
-    MakeRequest(make_url(get_controlled_accounts_func), content_type_application_json, content);
-}
-
-void HttpClient::abi_json_to_bin(const QByteArray &content)
-{
-    MakeRequest(make_url(json_to_bin_func), content_type_application_json, content);
-}
-
-void HttpClient::get_required_keys(const QByteArray &content)
-{
-    MakeRequest(make_url(get_required_keys_func), content_type_application_json, content);
-}
-
-void HttpClient::get_table(const QByteArray &content)
-{
-    MakeRequest(make_url(get_table_func), content_type_application_json, content);
-}
-
-void HttpClient::get_block(const QByteArray &content)
-{
-    MakeRequest(make_url(get_block_func), content_type_application_json, content);
+    for (int i = 0; i < ARRAY_SIZE(FunctionURLMap); ++i) {
+        if (id == FunctionURLMap[i].fid) {
+            MakeRequest(make_url(FunctionURLMap[i].func_url), content_type_application_json, content);
+            break;
+        }
+    }
 }
 
 void HttpClient::MakeRequest(const QString &url, const QString &contentType, const QByteArray &param)

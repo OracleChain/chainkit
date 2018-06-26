@@ -7,29 +7,45 @@ class QNetworkAccessManager;
 class QNetworkReply;
 
 const QString chain_func_base = "/v1/chain";
-const QString get_info_func = chain_func_base + "/get_info";
-const QString push_txn_func = chain_func_base + "/push_transaction";
-const QString push_txns_func = chain_func_base + "/push_transactions";
-const QString json_to_bin_func = chain_func_base + "/abi_json_to_bin";
-const QString get_block_func = chain_func_base + "/get_block";
-const QString get_account_func = chain_func_base + "/get_account";
-const QString get_table_func = chain_func_base + "/get_table_rows";
-const QString get_code_func = chain_func_base + "/get_code";
-const QString get_currency_balance_func = chain_func_base + "/get_currency_balance";
-const QString get_currency_stats_func = chain_func_base + "/get_currency_stats";
-const QString get_required_keys_func = chain_func_base + "/get_required_keys";
-
 const QString history_func_base = "/v1/history";
-const QString get_actions_func = history_func_base + "/get_actions";
-const QString get_transaction_func = history_func_base + "/get_transaction";
-const QString get_key_accounts_func = history_func_base + "/get_key_accounts";
-const QString get_controlled_accounts_func = history_func_base + "/get_controlled_accounts";
-
 const QString content_type_application_json = "application/json";
-
 const QString eos_account_regex = "([.1-5a-z]{3,12}$)";
 
 QString make_url(const QString& api_url);
+
+enum class FunctionID {
+    get_info = 0,
+    push_transaction,
+    push_transactions,
+    get_account,
+    get_transaction,
+    get_controlled_accounts,
+    abi_json_to_bin,
+    get_required_keys,
+    get_table,
+    get_block,
+    get_abi
+};
+
+struct func_ctx {
+    FunctionID fid;
+    QString func_url;
+};
+
+static func_ctx FunctionURLMap[] = {
+    { FunctionID::get_info, chain_func_base + "/get_info" },
+    { FunctionID::push_transaction, chain_func_base + "/push_transaction" },
+    { FunctionID::push_transactions, chain_func_base + "/push_transactions" },
+    { FunctionID::get_account, chain_func_base + "/get_account" },
+    { FunctionID::abi_json_to_bin, chain_func_base + "/abi_json_to_bin" },
+    { FunctionID::get_required_keys, chain_func_base + "/get_required_keys" },
+    { FunctionID::get_table, chain_func_base + "/get_table_rows" },
+    { FunctionID::get_block, chain_func_base + "/get_block" },
+    { FunctionID::get_abi, chain_func_base + "/get_abi"},
+
+    { FunctionID::get_transaction, history_func_base + "/get_transaction" },
+    { FunctionID::get_controlled_accounts, history_func_base + "/get_controlled_accounts" },
+};
 
 class HttpClient : public QObject
 {
@@ -38,16 +54,7 @@ public:
     explicit HttpClient(QObject *parent = 0);
     ~HttpClient();
 
-    void get_info();
-    void push_transaction(const QByteArray& content);
-    void push_transactions(const QByteArray& content);
-    void get_account(const QByteArray& content);
-    void get_transaction(const QByteArray& content);
-    void get_controlled_accounts(const QByteArray& content);
-    void abi_json_to_bin(const QByteArray& content);
-    void get_required_keys(const QByteArray& content);
-    void get_table(const QByteArray& content);
-    void get_block(const QByteArray& content);
+    void request(FunctionID id, const QByteArray& content);
 
 private:
     void MakeRequest(const QString& url, const QString& contentType = "", const QByteArray& param = "");
