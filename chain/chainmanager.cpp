@@ -7,22 +7,9 @@ namespace ChainManager {
 
 SignedTransaction createTransaction(const std::string &contract, const std::string &actionName, const std::string &hexData, const std::vector<std::string> &permissions, const QByteArray &info)
 {
-    Action action(contract, actionName);
-    action.setAuthorization(permissions);
-    action.setData(hexData);
-
     SignedTransaction txn;
-    txn.addAction(action);
-
-    if (!info.isEmpty() && !info.isNull()) {
-        QJsonDocument doc = QJsonDocument::fromJson(info);
-        QJsonObject obj = doc.object();
-        std::string headBlockId = obj.value("head_block_id").toString().toStdString();
-        std::string expiration = obj.value("head_block_time").toString().toStdString();
-
-        txn.setReferenceBlock(headBlockId);
-        txn.setExpiration(expiration);
-    }
+    addAction(txn, contract, actionName, hexData, permissions);
+    setTransactionHeaderInfo(txn, info);
 
     return txn;
 }
@@ -54,6 +41,28 @@ void ValidateSignature(const std::string &raw, const std::string &signature, con
         result = "Passed, signature and raw action match the public key!";
     } else {
         result = "Failed, signature and raw action do not match the public key!";
+    }
+}
+
+void addAction(SignedTransaction &signedTrx, const std::string &contract, const std::string &actionName, const std::string &hexData, const std::vector<std::string> &permissions)
+{
+    Action action(contract, actionName);
+    action.setAuthorization(permissions);
+    action.setData(hexData);
+
+    signedTrx.addAction(action);
+}
+
+void setTransactionHeaderInfo(SignedTransaction &signedTrx, const QByteArray &info)
+{
+    if (!info.isEmpty() && !info.isNull()) {
+        QJsonDocument doc = QJsonDocument::fromJson(info);
+        QJsonObject obj = doc.object();
+        std::string headBlockId = obj.value("head_block_id").toString().toStdString();
+        std::string expiration = obj.value("head_block_time").toString().toStdString();
+
+        signedTrx.setReferenceBlock(headBlockId);
+        signedTrx.setExpiration(expiration);
     }
 }
 
