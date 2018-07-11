@@ -9,7 +9,7 @@ extern QString url_port;
 
 #define ARRAY_SIZE(a) (sizeof(a)/sizeof(a[0]))
 
-QString make_url(const QString& api_url)
+QString _make_url(const QString& api_url)
 {
     QString url = base_url;
     if (!url.contains("http://", Qt::CaseInsensitive)
@@ -36,13 +36,13 @@ void HttpClient::request(FunctionID id, const QByteArray &content)
 {
     for (int i = 0; i < ARRAY_SIZE(FunctionURLMap); ++i) {
         if (id == FunctionURLMap[i].fid) {
-            MakeRequest(make_url(FunctionURLMap[i].func_url), content_type_application_json, content);
+            _make_request(_make_url(FunctionURLMap[i].func_url), content_type_application_json, content);
             break;
         }
     }
 }
 
-void HttpClient::MakeRequest(const QString &url, const QString &contentType, const QByteArray &param)
+void HttpClient::_make_request(const QString &url, const QString &contentType, const QByteArray &param)
 {
     QNetworkRequest request;
     request.setAttribute(QNetworkRequest::HttpStatusCodeAttribute, 200);

@@ -57,7 +57,7 @@ public:
     void request(FunctionID id, const QByteArray& content = "");
 
 private:
-    void MakeRequest(const QString& url, const QString& contentType = "", const QByteArray& param = "");
+    void _make_request(const QString& url, const QString& contentType = "", const QByteArray& param = "");
 
 signals:
     void responseData(const QByteArray& );
