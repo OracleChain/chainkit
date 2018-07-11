@@ -34,7 +34,7 @@ HttpClient::~HttpClient()
 
 void HttpClient::request(FunctionID id, const QByteArray &content)
 {
-    for (int i = 0; i < ARRAY_SIZE(FunctionURLMap); ++i) {
+    for (size_t i = 0; i < ARRAY_SIZE(FunctionURLMap); ++i) {
         if (id == FunctionURLMap[i].fid) {
             _make_request(_make_url(FunctionURLMap[i].func_url), content_type_application_json, content);
             break;
