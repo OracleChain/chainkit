@@ -8,6 +8,7 @@ class TransactionHeader : public ISerializer, public IFormater
 {
 public:
     TransactionHeader();
+    virtual ~TransactionHeader() {}
 
     virtual void serialize(EOSByteWriter* writer) const;
     virtual QJsonValue toJson() const;

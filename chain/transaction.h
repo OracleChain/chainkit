@@ -10,6 +10,7 @@ class Transaction : public TransactionHeader
 {
 public:
     Transaction();
+    virtual ~Transaction() {}
 
     virtual void serialize(EOSByteWriter* writer) const;
     virtual QJsonValue toJson() const;
