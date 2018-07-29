@@ -1,5 +1,7 @@
 # chainkit
-A codebase kit of EOS' base chain implemented by OracleChain. Developers can use this library to make his own cross-platform application. And it's a good(or simple) start to learn EOS.
+A codebase kit of EOS' base chain implemented by [OracleChain](https://github.com/OracleChain).
+
+Developers can use this library to make his own cross-platform application. And it's a good(or simple) start to learn EOS.
 
 
 > Developer must define his own `base_url` and `url_port` for connecting to node.
