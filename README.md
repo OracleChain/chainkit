@@ -1,5 +1,5 @@
 # chainkit
-A codebase kit of EOS' base chain implemented by [OracleChain](https://github.com/OracleChain).
+A codebase kit of EOS' base chain implemented by [OracleChain](https://github.com/OracleChain). Developed using C, C++ (QT5.8+).
 
 Developers can use this library to make his own cross-platform application, and it's a good(or simple) start to learn EOS.
 
