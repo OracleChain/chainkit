@@ -1,3 +1,4 @@
 # Qt's related
 build-*
 test/*.pro.user
+.DS_Store
