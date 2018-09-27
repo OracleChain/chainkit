@@ -20,7 +20,7 @@ QString _make_url(const QString& api_url)
     return url + (url_port.isEmpty() ? "" : QString(":" +url_port)) + api_url;
 }
 
-HttpClient::HttpClient(QObject *parent) : QObject(parent), reply(nullptr), qnam(new QNetworkAccessManager)
+HttpClient::HttpClient(QObject *parent) : QObject(parent), qnam(new QNetworkAccessManager), reply(nullptr)
 {
     Q_ASSERT(qnam);
 }
