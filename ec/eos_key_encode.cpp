@@ -75,7 +75,7 @@ std::vector<unsigned char> eos_key::get_public_key_by_pri(const std::vector<unsi
         result.push_back(c);
     }
 
-    delete priKey;
+    delete[] priKey;
 
     return result;
 }

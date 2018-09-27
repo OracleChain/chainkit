@@ -54,14 +54,14 @@ std::vector<char> aes_encrypt(const sha512& key, const std::vector<char>& plain_
         encrypted.push_back((char)temp[i]);
     }
 
-    delete temp;
+    delete[] temp;
 
     return encrypted;
 }
 
 std::vector<char> aes_decrypt(const sha512& key, const std::vector<char>& cipher_text)
 {
-    int size = cipher_text.size();
+    int size = (int)cipher_text.size();
     unsigned char *temp = new unsigned char[size];
     memcpy(temp, cipher_text.data(), size);
 
@@ -74,7 +74,7 @@ std::vector<char> aes_decrypt(const sha512& key, const std::vector<char>& cipher
         decrypted.push_back((char)temp[i]);
     }
 
-    // delete temp; why crash here for MingW?
+    delete [] temp;
 
     return decrypted;
 }
