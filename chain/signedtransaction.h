@@ -10,7 +10,7 @@ class SignedTransaction : public Transaction
 public:
     SignedTransaction();
 
-    virtual QJsonValue toJson();
+    virtual QJsonValue toJson() const;
     virtual void fromJson(const QJsonValue& value);
 
     std::vector<std::string> getSignatures() const;

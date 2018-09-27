@@ -16,7 +16,7 @@ SignedTransaction::SignedTransaction()
 
 }
 
-QJsonValue SignedTransaction::toJson()
+QJsonValue SignedTransaction::toJson() const
 {
     QJsonObject obj = Transaction::toJson().toObject();
     QJsonArray signaturesArr, ctxFreeDataArr;
@@ -87,7 +87,7 @@ void SignedTransaction::sign(const std::vector<unsigned char> &pri_key, const Ty
         return;
     } else {
         unsigned char bin[65+4] = { 0 };
-        unsigned char *rmdhash = NULL;
+        unsigned char *rmdhash = nullptr;
         int binlen = 65+4;
         int headerBytes = recId + 27 + 4;
         bin[0] = (unsigned char)headerBytes;
