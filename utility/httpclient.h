@@ -24,7 +24,8 @@ enum class FunctionID {
     get_required_keys,
     get_table,
     get_block,
-    get_abi
+    get_abi,
+    get_currency_balance
 };
 
 struct func_ctx {
@@ -42,6 +43,7 @@ static func_ctx FunctionURLMap[] = {
     { FunctionID::get_table, chain_func_base + "/get_table_rows" },
     { FunctionID::get_block, chain_func_base + "/get_block" },
     { FunctionID::get_abi, chain_func_base + "/get_abi"},
+    { FunctionID::get_currency_balance, chain_func_base + "/get_currency_balance"},
 
     { FunctionID::get_transaction, history_func_base + "/get_transaction" },
     { FunctionID::get_controlled_accounts, history_func_base + "/get_controlled_accounts" },
@@ -51,7 +53,7 @@ class HttpClient : public QObject
 {
     Q_OBJECT
 public:
-    explicit HttpClient(QObject *parent = 0);
+    explicit HttpClient(QObject *parent = nullptr);
     ~HttpClient();
 
     void request(FunctionID id, const QByteArray& content = "");
