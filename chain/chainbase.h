@@ -19,12 +19,16 @@ static const std::string EOS_SYSTEM_ACCOUNT = "eosio";
 class ISerializer
 {
 public:
+    virtual ~ISerializer();
+
     virtual void serialize(EOSByteWriter* writer) const = 0;
 };
 
 class IFormater
 {
 public:
+    virtual ~IFormater();
+
     virtual QJsonValue toJson() const = 0;
     virtual void fromJson(const QJsonValue& value) = 0;
 };
