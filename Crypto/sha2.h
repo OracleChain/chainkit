@@ -31,6 +31,10 @@
 #ifndef __SHA2_H__
 #define __SHA2_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 #include <stddef.h>
 
@@ -97,5 +101,9 @@ void sha512_Final(SHA512_CTX*, uint8_t[SHA512_DIGEST_LENGTH]);
 char* sha512_End(SHA512_CTX*, char[SHA512_DIGEST_STRING_LENGTH]);
 void sha512_Raw(const uint8_t*, size_t, uint8_t[SHA512_DIGEST_LENGTH]);
 char* sha512_Data(const uint8_t*, size_t, char[SHA512_DIGEST_STRING_LENGTH]);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
