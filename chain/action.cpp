@@ -12,7 +12,7 @@ Action::Action()
 Action::Action(const TypeName &account, const TypeName &action, const TypePermissionLevel &auth, const std::string &data)
 {
     this->account = account;
-    this->account = action;
+    this->action = action;
     this->authorization.push_back(auth);
     this->data = data;
 }
